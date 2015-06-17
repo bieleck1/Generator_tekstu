@@ -1,5 +1,5 @@
-generator: main.c
-	$(CC) -o generator main.c
+generator: main.o baza.o generacja.o
+	$(CC) -o generator main.c baza.c generacja.c
 
 .PHONY: clean
 
