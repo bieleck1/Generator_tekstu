@@ -1,6 +1,8 @@
 #ifndef BAZA_H
 #define BAZA_H
 
+#include "pliki_wejsciowe.h"
+
 typedef struct slowo {
         char *sufix;
 } slowo_t;

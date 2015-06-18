@@ -11,16 +11,16 @@
 char * usage = 	"Uzywanie: %s [ -t teksty [ -w tekst_wyjsciowy ] [ -a liczba_akapitow ] [ -s liczba_slow ] [ -n stopien_n-gramow ] ]	\n"
 		"		Jesli wprowadziles nazwy plikow tekstowych podaj:							\n"
 		"			-nazwe pliku wyjsciowego z sufiksem .txt		     					\n"
-		"			-ilosc akapitow, z ktorej ma sie skladac wygenerowany tekst					\n"
-		"			-ilosc slow, z ktorej ma sie skladac wygenerowany tekst      					\n"
+		"			-ilosc akapitow, z ktorej ma sie skladac wygenerowany tekst (a > 0)				\n"
+		"			-ilosc slow, z ktorej ma sie skladac wygenerowany tekst (s > 20)    				\n"
 		"			-stopien n-gramow, na podstawie ktorych bedzie tworzony tekst (n > 1)				\n";
 
 int main (int argc, char **argv) {
 	int opt;
 	int i = 0;
- 	int ilosc_akapitow = 0;
-	int ilosc_slow = 0;
- 	int stopien = 0;
+ 	int ilosc_akapitow = 1;
+	int ilosc_slow = 100;
+ 	int stopien = 2;
  	char *tekst_wyjsciowy = NULL;
  	char *nazwa_programu = argv[0];
  	pliki_t *teksty_wejsciowe, *teksty;
@@ -78,22 +78,18 @@ int main (int argc, char **argv) {
 		}	
 	}
 	
-	if (stopien < 2) {
+	if (stopien < 2 || ilosc_akapitow < 1 || ilosc_slow < 20) {
 		fprintf (stderr, usage, nazwa_programu);
                 exit (EXIT_FAILURE);
 	}
-baza_t baza;
+
+	srand(time(NULL));
+
+	baza_t baza;
+
 	baza = wczytaj(teksty, stopien);
-generuj();
-int r, f;
-	for (r = 0; r < baza.aktualny_rozmiar; r++) {
-		printf("%s :", baza.prefixy[r].prefix);
-		
-		for (f = 0; f < baza.prefixy[r].ilosc_sufixow; f++) {
-			printf("%s", baza.prefixy[r].sufixy[f].sufix);
-		}
-		printf("\n");
-	}
+
+	baza = generuj(baza, tekst_wyjsciowy, ilosc_akapitow, ilosc_slow, stopien);
 
 	teksty_wejsciowe = teksty;
 
@@ -104,8 +100,5 @@ int r, f;
 		teksty_wejsciowe = teksty;
 	} while (teksty != NULL);
 
-
-printf("%d \n%d \n %d\n", ilosc_akapitow, ilosc_slow, stopien);  
- 
 	return 0;
 }

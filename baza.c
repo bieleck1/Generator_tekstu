@@ -115,6 +115,8 @@ baza_t wczytaj (pliki_t *pliki_wejsciowe, int stopien) {
 							}
                                 		}
                         		}
+
+					prefix[dlugosc] = '\0';
 				}
 
 				if (znak != ' ' && znak != '.' && znak != '!' && znak != '?') {
@@ -126,6 +128,8 @@ baza_t wczytaj (pliki_t *pliki_wejsciowe, int stopien) {
 						dlugosc_suf++;
 						state_nowy_pref = 1;
 					}
+					
+					sufix[dlugosc_suf] = '\0';
 
 					for (w = 0; w < baza.aktualny_rozmiar; w++) {
 						if (strcmp(baza.prefixy[w].prefix, prefix) == 0) {
@@ -193,6 +197,8 @@ baza_t wczytaj (pliki_t *pliki_wejsciowe, int stopien) {
 								prefix[dlugosc] = sufix[w];
 								dlugosc++;
 							}
+							
+							prefix[dlugosc] = '\0';
 						} else {
 							prefix = sufix;
 						}
@@ -204,6 +210,7 @@ baza_t wczytaj (pliki_t *pliki_wejsciowe, int stopien) {
 			}
 		}
 
+		fclose(in);
 		pliki_wejsciowe = pliki_wejsciowe->next;
 	} while(pliki_wejsciowe != NULL);
 
