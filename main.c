@@ -6,6 +6,7 @@
 #include "pliki_wejsciowe.h"
 #include "baza.h"
 #include "generacja.h"
+#include "stat.h"
 
 
 char * usage = 	"Uzywanie: %s [ -t teksty [ -w tekst_wyjsciowy ] [ -a liczba_akapitow ] [ -s liczba_slow ] [ -n stopien_n-gramow ] ]	\n"
@@ -90,11 +91,14 @@ int main (int argc, char **argv) {
 	baza = wczytaj(teksty, stopien);
 
 	baza = generuj(baza, tekst_wyjsciowy, ilosc_akapitow, ilosc_slow, stopien);
+	
+	drukuj_wejsciowe(baza);
 
+	drukuj_wyjsciowe(baza);
+	
 	teksty_wejsciowe = teksty;
 
 	do {
-		printf("%s\n", teksty->nazwa_pliku);
 		teksty = teksty->next;
 		free(teksty_wejsciowe);
 		teksty_wejsciowe = teksty;

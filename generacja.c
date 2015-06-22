@@ -74,13 +74,15 @@ baza_t generuj (baza_t baza, char *plik_wyjsciowy,  int akapity, int slowa, int 
 				kropka = 0;
 				w = w + stopien - 1;
 			} else {
-				for(g = 0; g < baza.aktualny_rozmiar; g++) {
-					if (strcmp(prefix, baza.prefixy[g].prefix) == 0) {
-						int los = rand() % baza.prefixy[g].ilosc_sufixow;
-						fprintf(out, "%s", baza.prefixy[g].sufixy[los].sufix);
-						prefix = nowy_prefix(prefix, baza.prefixy[g].sufixy[los].sufix, stopien);
+				for(g = 0; g < bazka.aktualny_rozmiar; g++) {
+					if (strcmp(prefix, bazka.prefixy[g].prefix) == 0) {
+						int los = rand() % bazka.prefixy[g].ilosc_sufixow;
+						fprintf(out, "%s", bazka.prefixy[g].sufixy[los].sufix);
+						bazka.prefixy[g].sufixy[los].ilosc_wyjscia++;
+						bazka.stat_wyjsciowe++;
+						prefix = nowy_prefix(prefix, bazka.prefixy[g].sufixy[los].sufix, stopien);
 						kropka = 0;
-						g = baza.aktualny_rozmiar;
+						g = bazka.aktualny_rozmiar;
 					} else {
 						kropka = 1;
 					}				

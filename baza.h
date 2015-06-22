@@ -5,6 +5,8 @@
 
 typedef struct slowo {
         char *sufix;
+	int ilosc_wejscia;
+	int ilosc_wyjscia;
 } slowo_t;
 
 typedef struct ngram {
@@ -17,6 +19,8 @@ typedef struct baza {
 	int rozmiar;
 	int aktualny_rozmiar;
 	ngram_t *prefixy;
+	int stat_wejsciowe;
+	int stat_wyjsciowe;
 } baza_t;
 
 baza_t wczytaj(pliki_t *pliki_wejsciowe, int stopien);

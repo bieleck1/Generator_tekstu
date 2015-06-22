@@ -1,5 +1,5 @@
-generator: main.o baza.o generacja.o
-	$(CC) -o generator main.c baza.c generacja.c
+generator: main.o baza.o generacja.o stat.o
+	$(CC) -o generator main.c baza.c generacja.c stat.c
 
 .PHONY: clean
 
